@@ -1,0 +1,45 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %} {% endblock %}</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+
+    <!-- XDSoft DateTimePicker -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.min.css" integrity="sha256-DOS9W6NR+NFe1fUhEE0PGKY/fubbUCnOfTje2JMDw3Y=" crossorigin="anonymous" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js" integrity="sha256-FEqEelWI3WouFOo2VWP/uJfs1y8KJ++FLh2Lbqc8SJk=" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="{% static 'landing/css/landing.css' %}">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+    <style>
+        .hello-msg{
+            font-size: 18px;
+            color: #efefef;
+            margin-right: 20px;
+        }
+    </style>
+</head>
+<body>
+    <aside>
+        <img src="{% static 'landing/img/logo.png' %}" alt="Лого">
+        <span class="logo">Система заявок</span><br><br><br>
+        <span class="hello-msg">Здравствуйте, {{ request.user }}</span>
+        <span class="hello-msg"><a href="{% url 'logout' %}">Выйти</a></span>
+        <h3>Навигация</h3>
+        <ul>
+            <a href="{% url 'new_application' %}"><li><i class="far fa-calendar-plus"></i> Создание заявки</li></a>
+            <a href="{% url 'search' %}"><li><i class="far fa-calendar-check"></i> Закрытие заявки</li></a>
+            <a href="{% url 'about' %}"><li><i class="fas fa-eye"></i> Список заявок</li></a>
+            <a href="{% url 'application' %}"><li><i class="fas fa-print"></i> Печать заявок</li></a>
+        </ul>
+    </aside>
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
+</body>
+</html>

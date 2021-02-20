@@ -1,0 +1,23 @@
+{% extends 'landing/layout.html' %}
+
+{% block title %}Редактирование заявки {{ application.id }}{% endblock %}
+
+{% block content %}
+    <div class="features">
+        <h3>Заявка ID: {{ application.id }}</h3>
+        <p>Номер объекта: {{ application.number_object }}</p>
+        <p>Дата создания заявки: {{ application.date_application }}</p>
+        <p>Имя объекта: {{ application.name_object }}</p>
+        <p>Срочность: {{ application.urgency_application }}</p>
+        <p>Адрес: {{ application.address_object }}</p>
+        <p>Район: {{ application.service_area }}</p>
+        <p>Тип неисправности: {{ application.type_of_problem }}</p>
+        <p>Комментарий к заявке: {{ application.comment }}</p>
+        <p>Назначенная дата: {{ application.completion_date }}</p>
+        <p>Инициатор заявки: {{ application.source_application }}</p>
+        <p>ФИО инициатора: {{ application.initiator_of_the_application }}</p>
+        <p>Статус заявки: {{ application.status_application }}</p>
+        <p>Закрыта техником: {{ application.technician }}</p>
+        <h1><a href="{% url 'application-update' application.id %}" class="far fa-edit"></a></h1>
+    </div>
+{% endblock %}

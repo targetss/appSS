@@ -1,0 +1,67 @@
+{% block content %}
+
+<style>
+.table {
+	width: 100%;
+	margin-bottom: 20px;
+	border-collapse: collapse;
+}
+.table th {
+	font-weight: bold;
+	padding: 5px;
+	background: #efefef;
+	border: 1px solid #dddddd;
+}
+.table td {
+	border: 1px solid #dddddd;
+	padding: 5px;
+    color: #111112;
+}
+.table tr td:first-child, .table tr th:first-child {
+	border-left: none;
+}
+.table tr td:last-child, .table tr th:last-child {
+	border-right: none;
+}
+</style>
+    <div class="features">
+            <form method="post">
+                {% csrf_token %}
+                {{ form.sort_form }}
+                {{ form.completion_date }}
+                <button class="btn btn-success" type="submit" value="Select">Выборка</button>
+            </form>
+        <p>
+            <a href="{% url 'about' %}" class="far fa-calendar-plus">Вернуться назад</a>
+        </p>
+                <br><br>
+            <table class="table">
+                <tbody>
+                    <tr>
+                        <th>ID</th>
+                        <th>Номер объекта</th>
+                        <th>Срочность</th>
+                        <th>Время</th>
+                        <th>Имя объекта</th>
+                        <th>Адрес</th>
+                        <th>Комментарий</th>
+                        <th>Тип неисправности</th>
+                        <th>ФИО источника</th>
+                    </tr>
+                    {% for el in application_objects_filter %}
+                    <tr>
+                        <td>{{ el.id }}</td>
+                        <td>{{ el.number_object }}</td>
+                        <td>{{ el.urgency_application }}</td>
+                        <td>{{ el.completion_date }}</td>
+                        <td>{{ el.name_object }}</td>
+                        <td>{{ el.address_object }}</td>
+                        <td>{{ el.comment }}</td>
+                        <td>{{ el.type_of_problem }}</td>
+                        <td>{{ el.initiator_of_the_application }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+    </div>
+{% endblock %}
