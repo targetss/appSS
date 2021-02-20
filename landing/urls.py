@@ -9,6 +9,5 @@ urlpatterns = [
     path('about/<int:pk>/delete', views.ApplicationDeleteView.as_view(), name='application-delete'),
     path('application', views.application, name='application'),
     path('login', views.loginPage, name='login'),
-    path('logout', views.logoutUser, name='logout'),
-    path('search', views.SearchResultView.as_view(), name='search')
+    path('logout', views.logoutUser, name='logout')
 ]

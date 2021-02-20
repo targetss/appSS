@@ -46,10 +46,15 @@ class ApplicationDeleteView(DeleteView):
 
 @login_required(login_url='login')
 def about(request):
-    application_objects = ApplicationObject.objects.all()
-
+    query = request.GET.get('search', None)
+    if query:
+        application_objects = ApplicationObject.objects.filter(
+            Q(name_object__icontains=query) | Q(address_object__icontains=query) | Q(id__icontains=query) | Q(
+                number_object__icontains=query))
+    else:
+        application_objects = ApplicationObject.objects.all()
     application_paginator = Paginator(application_objects, 3)
-    page_num = request.GET.get('page', '-date_application')
+    page_num = request.GET.get('page')
     page = application_paginator.get_page(page_num)
     data = {
         'count': application_paginator.count,
@@ -93,17 +98,3 @@ def loginPage(request):
 def logoutUser(request):
     logout(request)
     return redirect('login')
-
-
-class SearchResultView(LoginRequiredMixin, ListView):
-    login_url = '/login'
-    model = ApplicationObject
-    template_name = 'landing/search.html'
-
-    def get_queryset(self):
-        query = self.request.GET.get('q', None)
-        if query:
-            object_list = ApplicationObject.objects.filter(Q(name_object__icontains=query) | Q(address_object__icontains=query) | Q(id__icontains=query) | Q(number_object__icontains=query))
-            return object_list
-        else:
-            return ApplicationObject.objects.all()

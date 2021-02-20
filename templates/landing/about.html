@@ -7,6 +7,10 @@
         <h1>Список заявок</h1>
         <h6>Номер страницы {{ page.number }}</h6>
                 <br><br>
+        <form method="get">
+            <input name="search" type="text" placeholder="Поиск..">
+            <button class="btn btn-success" type="submit" value="Select">Поиск</button>
+        </form><br>
             <table class="table">
                 <tbody>
                     <tr>
