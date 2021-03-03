@@ -8,14 +8,14 @@ class ApplicationObjectForm(ModelForm):
         exclude = [""]
         widgets = {
             "number_object": TextInput(attrs={
-                'class': 'form-control col-md-4',
+                'class': 'form-control',
                 'placeholder': 'Номер объекта'
             }),
             "urgency_application": Select(attrs={
-                'class': 'form-group col-sm-6',
+                'class': 'custom-select mr-sm-2',
             }),
             "completion_date": DateInput(attrs={
-                'class': 'form-group',
+                'class': 'form-control',
                 'type': 'date'
             }),
             "name_object": TextInput(attrs={
@@ -27,24 +27,27 @@ class ApplicationObjectForm(ModelForm):
                 'placeholder': 'Адрес объекта'
             }),
             "service_area": Select(attrs={
-                'class': 'form-group col-sm-6'
+                'class': 'custom-select mr-sm-2'
             }),
             "comment": Textarea(attrs={
                 'class': 'form-control',
                 'placeholder': 'Комментарий'
             }),
             "source_application": Select(attrs={
-                'class': 'form-group col-sm-6'
+                'class': 'custom-select mr-sm-2'
             }),
             "initiator_of_the_application": TextInput(attrs={
                 'class': 'form-control',
                 'placeholder': 'Инициатор заявки'
             }),
             "status_application": Select(attrs={
-                'class': 'form-group col-sm-6'
+                'class': 'custom-select mr-sm-2'
             }),
             "type_of_problem": Select(attrs={
-                'class': 'form-group col-sm-6'
+                'class': 'custom-select mr-sm-2'
+            }),
+            "technician": Select(attrs={
+                'class': 'custom-select mr-sm-2'
             }),
         }
 
@@ -63,3 +66,6 @@ class SortForm(forms.Form):
             ('Екб. + Свердловская область', 'Екб. + Свердловская область')
         ])
     completion_date = forms.DateField(widget=forms.DateInput(attrs={'type': 'date'}))
+
+class Search(forms.Form):
+    comment = forms.CharField()

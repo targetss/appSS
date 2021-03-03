@@ -4,16 +4,15 @@
 
 {% block content %}
     <div class="features">
-        <h1>Список заявок</h1>
+        <h3>Список заявок</h3>
         <h6>Номер страницы {{ page.number }}</h6>
-                <br><br>
         <form method="get">
             <input name="search" type="text" placeholder="Поиск..">
             <button class="btn btn-success" type="submit" value="Select">Поиск</button>
         </form><br>
-            <table class="table">
+            <table class="table table-hover">
                 <tbody>
-                    <tr>
+                    <tr class="table-warning">
                         <th>ID</th>
                         <th>Номер объекта</th>
                         <th>Время</th>

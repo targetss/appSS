@@ -3,28 +3,66 @@
 {% block title %}Создание заявки{% endblock %}
 
 {% block content %}
-    <div class="features">
-        <h1>{{ title }}</h1>
+        <div class="text-center"><h2>{{ title }}</h2></div>
         <form method="post">
             {% csrf_token %}
-            {{ form.number_object }}<br>
             <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="">Номер объекта</label>
+                    {{ form.number_object }}
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="">Наименование</label>
+                    {{ form.name_object }}
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="">Адрес</label>
+                {{ form.address_object }}
+            </div>
+            <div class="form-row align-items-center">
+                <div class="form-group col-md-6">
+                    <label class="mr-sm-2" for="">Срочность</label>
                     {{ form.urgency_application }}
-                    {{ form.completion_date }}
+                </div>
+                <div class="form-group col-md-6">
+                    <label class="mr-sm-2" for="">Район</label>
                     {{ form.service_area }}
+                </div>
+                <div class="form-group col-md-6">
+                    <label class="mr-sm-2" for="">Инициатор заявки</label>
                     {{ form.source_application }}
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="example-date-input" class="mr-sm-2">Дата выполнения</label>
+                    {{ form.completion_date }}
+                </div>
+                <div class="form-group col-md-6">
+                    <label class="mr-sm-2" for="">Состояние</label>
+                    {{ form.status_application }}
+                </div>
+                <div class="form-group col-md-6">
+                    <label class="mr-sm-2" for="">Тип неисправности</label>
+                    {{ form.type_of_problem }}
+                </div>
             </div>
-            {{ form.name_object }}<br>
-            {{ form.address_object }}<br>
+            <div class="form-group">
+                <label for="">Комментарий</label>
+                {{ form.comment }}
+            </div>
+            <div class="form-group">
+                <label for="">ФИО инициатора</label>
+                {{ form.initiator_of_the_application }}
+            </div>
             <div class="form-row">
-                {{ form.status_application }}
-                {{ form.type_of_problem }}
+                <div class="form-group col-md-6">
+                    <label class="mr-sm-2" for="">Закрыл(при закрытии заявки)</label>
+                    {{ form.technician }}
+                </div>
             </div>
-            {{ form.comment }}<br>
-            {{ form.initiator_of_the_application }}<br>
-            Закрыл {{ form.technician }}<br><br>
             <span>{{ error }}</span>
-            <button class="btn btn-success" type="submit">Создать заявку</button>
+            <div class="text-center">
+                <button class="btn btn-success" type="submit">Создать заявку</button>
+            </div>
         </form>
-    </div>
 {% endblock %}

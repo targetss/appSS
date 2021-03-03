@@ -1,12 +1,13 @@
 from django.shortcuts import render, redirect
 from django.views.generic import DetailView, UpdateView, DeleteView
-from .forms import ApplicationObjectForm, SortForm
+from .forms import ApplicationObjectForm, SortForm, Search
 from .models import ApplicationObject
 from django.core.paginator import Paginator
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
+import psutil
 
 @login_required(login_url='login')
 def index(request):
@@ -27,6 +28,7 @@ def index(request):
         'error': error
     }
     return render(request, 'landing/index.html', data)
+
 
 class ApplicationDetailView(DetailView):
     model = ApplicationObject
@@ -52,7 +54,7 @@ def about(request):
                 number_object__icontains=query))
     else:
         application_objects = ApplicationObject.objects.all()
-    application_paginator = Paginator(application_objects, 3)
+    application_paginator = Paginator(application_objects, 7)
     page_num = request.GET.get('page')
     page = application_paginator.get_page(page_num)
     data = {
@@ -97,3 +99,22 @@ def loginPage(request):
 def logoutUser(request):
     logout(request)
     return redirect('login')
+
+def test(request):
+    proc_objects = []
+    form = Search(request.POST)
+    for p in psutil.process_iter(attrs=['pid', 'username', 'cpu_percent', 'memory_percent', 'memory_info', 'name']):
+        process_info = [p.pid, p.info['username'], round(p.info['memory_info'].rss), p.info['cpu_percent'],p.info['memory_percent'], p.info['name']]
+        proc_objects.append(process_info)
+        td_buttons = ['hangup', 'terminate', 'kill']
+        if request.method == "POST":
+            if form.is_valid():
+                if p.name() == form.cleaned_data['comment']:
+                    p.kill()
+
+    context_processes = {
+        'proc_objects': proc_objects,
+        'td_buttons': td_buttons,
+        'form': form
+    }
+    return render(request, 'landing/test.html', context_processes)

@@ -3,21 +3,26 @@
 {% block title %}Редактирование заявки {{ application.id }}{% endblock %}
 
 {% block content %}
-    <div class="features">
-        <h3>Заявка ID: {{ application.id }}</h3>
-        <p>Номер объекта: {{ application.number_object }}</p>
-        <p>Дата создания заявки: {{ application.date_application }}</p>
-        <p>Имя объекта: {{ application.name_object }}</p>
-        <p>Срочность: {{ application.urgency_application }}</p>
-        <p>Адрес: {{ application.address_object }}</p>
-        <p>Район: {{ application.service_area }}</p>
-        <p>Тип неисправности: {{ application.type_of_problem }}</p>
-        <p>Комментарий к заявке: {{ application.comment }}</p>
-        <p>Назначенная дата: {{ application.completion_date }}</p>
-        <p>Инициатор заявки: {{ application.source_application }}</p>
-        <p>ФИО инициатора: {{ application.initiator_of_the_application }}</p>
-        <p>Статус заявки: {{ application.status_application }}</p>
-        <p>Закрыта техником: {{ application.technician }}</p>
-        <h1><a href="{% url 'application-update' application.id %}" class="far fa-edit"></a></h1>
+    <br><br>
+    <div class="container-fluid">
+        <div class="form-row">
+            <ul>
+                <li><h5>Заявка ID: {{ application.id }}</h5></li>
+                <li>Номер объекта: {{ application.number_object }}</li>
+                <li>Дата создания заявки: {{ application.date_application }}</li>
+                <li>Имя объекта: {{ application.name_object }}</li>
+                <li>Срочность: {{ application.urgency_application }}</li>
+                <li>Адрес: {{ application.address_object }}</li>
+                <li>Район: {{ application.service_area }}</li>
+                <li>Тип неисправности: {{ application.type_of_problem }}</li>
+                <li>Комментарий к заявке: {{ application.comment }}</li>
+                <li>Назначенная дата: {{ application.completion_date }}</li>
+                <li>Инициатор заявки: {{ application.source_application }}</li>
+                <li>Статус заявки: {{ application.initiator_of_the_application }}</li>
+                <li>Закрыта техником: {{ application.technician }}</li>
+            </ul>
+        </div>
+        <button type="button" class="btn btn-info" onclick="location.href='{% url 'application-update' application.id %}'">Редактирование</button>
+        <button type="button" class="btn btn-danger" onclick="location.href='{% url 'application-delete' application.id %}'">Удалить</button>
     </div>
 {% endblock %}
