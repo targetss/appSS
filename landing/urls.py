@@ -10,5 +10,5 @@ urlpatterns = [
     path('application', views.application, name='application'),
     path('login', views.loginPage, name='login'),
     path('logout', views.logoutUser, name='logout'),
-    path('test', views.test, name='test')
+    path('report', views.Report.as_view(), name='report')
 ]

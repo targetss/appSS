@@ -1,0 +1,57 @@
+{% extends 'landing/layout.html' %}
+
+{% block title %}Отчеты{% endblock %}
+
+{% block content %}
+
+    <form method="get" action="">
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="">Начальная дата</label>
+                {{ form.completion_date }}
+            </div>
+            <div class="form-group col-md-6">
+                <label for="">Конечная дата</label>
+                {{ form.completion_date_2 }}
+            </div>
+        </div>
+        <div class="text-center">
+            <button class="btn btn-success" type="submit">Сформировать</button>
+        </div>
+    </form>
+    <br>
+    <div class="col-4">
+        <input class="form-control" id="myInput" type="text" placeholder="Поиск по таблице..">
+    </div><br>
+    <table class="table table-hover">
+        <thead>
+        <tr class="table-warning">
+            <th>ID</th>
+            <th>Номер объекта</th>
+            <th>Срочность</th>
+            <th>Время</th>
+            <th>Имя объекта</th>
+            <th>Адрес</th>
+            <th>Комментарий</th>
+            <th>
+            </th>
+            <th>ФИО источника</th>
+        </tr>
+        </thead>
+        {% for el in application_objects %}
+        <tbody id="myTable">
+            <tr>
+                <td>{{ el.id }}</td>
+                <td>{{ el.number_object }}</td>
+                <td>{{ el.urgency_application }}</td>
+                <td>{{ el.completion_date }}</td>
+                <td>{{ el.name_object }}</td>
+                <td>{{ el.address_object }}</td>
+                <td>{{ el.comment }}</td>
+                <td>{{ el.type_of_problem }}</td>
+                <td>{{ el.initiator_of_the_application }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

@@ -1,6 +1,13 @@
 from django.db import models
 
 
+class CustomManager(models.Manager):
+    def get_queryset(self):
+        return super().get_queryset().order_by('-completion_date')
+
+    def get_date_range(self, date_1, date_2):
+        return super().get_queryset().filter(completion_date__range=(date_1, date_2))
+
 class Technician(models.Model):
     name = models.CharField('ФИО техника', max_length=50)
 
@@ -93,3 +100,7 @@ class ApplicationObject(models.Model):
     class Meta:
         verbose_name = "Заявка"
         verbose_name_plural = "Заявки"
+
+    objects = models.Manager()
+    custom_manager = CustomManager()
+

@@ -65,7 +65,9 @@ class SortForm(forms.Form):
             ('Сосновский', 'Сосновский'),
             ('Екб. + Свердловская область', 'Екб. + Свердловская область')
         ])
-    completion_date = forms.DateField(widget=forms.DateInput(attrs={'type': 'date'}))
+    completion_date = forms.DateField(widget=forms.DateInput(attrs={'type': 'date', 'class': 'form-control'}), required=False)
+    completion_date_2 = forms.DateField(widget=forms.DateInput(attrs={'type': 'date', 'class': 'form-control'}), required=False)
+    initiator = forms.CharField(widget=forms.TextInput(attrs={'type': 'text'}), required=False)
 
 class Search(forms.Form):
     comment = forms.CharField()
