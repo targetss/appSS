@@ -3,7 +3,6 @@
 {% block title %}Отчеты{% endblock %}
 
 {% block content %}
-
     <form method="get" action="">
         <div class="form-row">
             <div class="form-group col-md-6">
@@ -18,11 +17,22 @@
         <div class="text-center">
             <button class="btn btn-success" type="submit">Сформировать</button>
         </div>
+    </form><br>
+    <form action="{% url 'export_excel' %}" method="get">
+    <div class="form-row">
+        <div class="form-group col-md-5">
+            <input class="form-control" id="myInput" type="text" placeholder="Поиск по таблице..">
+        </div>
+        <div class="form-group col-md-2">
+            <input type="button" value="Поиск" name="hello" onclick="test()">
+        </div>
+        <div class="form-group col-md-5">
+                <input type="hidden" name="search" id="report" type="text">
+                <button class="btn btn-success" type="submit" value="Select">Выгрузить в Excel</button>
+        </div>
+    </div>
     </form>
     <br>
-    <div class="col-4">
-        <input class="form-control" id="myInput" type="text" placeholder="Поиск по таблице..">
-    </div><br>
     <table class="table table-hover">
         <thead>
         <tr class="table-warning">
@@ -33,15 +43,14 @@
             <th>Имя объекта</th>
             <th>Адрес</th>
             <th>Комментарий</th>
-            <th>
-            </th>
+            <th>Неисправность</th>
             <th>ФИО источника</th>
         </tr>
         </thead>
         {% for el in application_objects %}
         <tbody id="myTable">
             <tr>
-                <td>{{ el.id }}</td>
+                <td id="id">{{ el.id }}</td>
                 <td>{{ el.number_object }}</td>
                 <td>{{ el.urgency_application }}</td>
                 <td>{{ el.completion_date }}</td>
